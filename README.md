@@ -1,7 +1,7 @@
 # ksd-android-OCR-Reader
 ## 1. UI
 
-<img src="C:\Users\HAI-NLP\Desktop\Screenshot_1613141596 - 복사본.jpg" alt="Screenshot_1613141596 - 복사본" style="zoom:33%;" />
+<img src="https://user-images.githubusercontent.com/16772440/107788869-3ebb9400-6d94-11eb-8f49-6c67e4b25736.jpg" alt="UI" style="zoom:33%;" />
 
 
 
@@ -22,6 +22,7 @@ OCR 분석 결과를 보여줍니다. REST Call 실패 시 False가 나타납니
 
 
 ## 2. 프로그램 구조
+<img src="https://user-images.githubusercontent.com/16772440/107788866-3d8a6700-6d94-11eb-8b7c-3edda929a734.PNG" alt="Class struct" style="zoom:33%;" />
 
 ![](C:\Users\HAI-NLP\Desktop\2.PNG)
 
