@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ksdAndroidOCRReader</string>
+    <string name="result">Result</string>
+    <string name="rest_call">REST CALL</string>
+    <string name="image_select">Image Select</string>
+    <string name="take_photo">take photo</string>
+    <string name="image_is_not_selected">Image is not selected</string>
 </resources>
