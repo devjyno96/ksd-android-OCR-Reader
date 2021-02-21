@@ -107,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-<<<<<<<
     public void restCallOnClick(View view) throws IOException {
         if(!(image_selected)){
             String Text = "이미지를 선택해 주십시오.";
@@ -116,28 +115,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         S3NetworkTask s3NetworkTask = new S3NetworkTask(new File(selectedImageUri));
-=======
-    public void restCallOnClick(View view) throws IOException {
-        if(!(image_selected)){
-            String Text = "이미지를 선택해 주십시오.";
-            Toast.makeText(getApplicationContext(),Text, Toast.LENGTH_SHORT).show();
-            return;
-        }
-        Cursor cursor = getContentResolver().query(selectedImageUri, null, null, null, null);
-        cursor.moveToNext();
-        String path = cursor.getString(cursor.getColumnIndex("_data"));
-
-        S3NetworkTask s3NetworkTask = new S3NetworkTask(new File(path));
->>>>>>>
         s3NetworkTask.execute();
 
-<<<<<<<
         String[] temp = selectedImageUri.split("/");
         String fileName = temp[temp.length - 1];
-=======
-        String[] temp = path.split("/");
-        String fileName = temp[temp.length - 1];
->>>>>>>
 
         ContentValues params = new ContentValues();
         params.put("url", S3_URL + S3FileUpload.getBucket_name() + "/" + fileName);
@@ -148,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
         String Text = "실행 완료";
         Toast.makeText(getApplicationContext(),Text, Toast.LENGTH_SHORT).show();
     }
-<<<<<<<
 
     public void imageSelectOnClick(View v) {
         Intent intent = new Intent(Intent.ACTION_PICK);
@@ -210,53 +190,4 @@ public class MainActivity extends AppCompatActivity {
         selectedImageUri = image.getAbsolutePath();
         return image;
     }
-=======
-
-    public void imageSelectOnClick(View v) {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-        startActivityForResult(intent, GET_GALLERY_IMAGE);
-        // startActivityForResult(intent, REQ_CAMERA_IMAGE);
-    }
-
-    public void takePhotoOnClick(View v) {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-        }
-        System.out.println("takePhotoOnClicked");
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        // select image
-        if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            selectedImageUri = data.getData();
-        }
-        // take photo
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            System.out.println("takePhotoOnClicked onActivityResult");
-            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-            String imageFileName = "JPEG_" + timeStamp + "_";
-            File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-            File image = null;
-            try {
-                image = File.createTempFile(
-                        imageFileName,  /* prefix */
-                        ".jpg",         /* suffix */
-                        storageDir      /* directory */
-                );
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            // Save a file: path for use with ACTION_VIEW intents
-            selectedImageUri = Uri.parse(image.getAbsolutePath());
-        }
-        image_selected = true;
-        image_state.setText("Image Selected");
-    }
-
->>>>>>>
 }
