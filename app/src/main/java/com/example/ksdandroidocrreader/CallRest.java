@@ -50,7 +50,6 @@ public class CallRest {
 
             // [2-2]. parameter 전달 및 데이터 읽어오기.
             String strParams = sbParams.toString(); //sbParams에 정리한 파라미터들을 스트링으로 저장. 예)id=id1&pw=123;
-            System.out.println(strParams);
             //출처: https://jaehoney.tistory.com/14 [A work-loving developer]
             DataOutputStream wr = new DataOutputStream(con.getOutputStream());
             wr.write(strParams.getBytes("UTF-8"));

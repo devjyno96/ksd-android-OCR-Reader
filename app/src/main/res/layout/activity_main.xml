@@ -6,41 +6,76 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/Test_Viewer"
-        android:layout_width="235dp"
-        android:layout_height="307dp"
-        android:text="Hello World!"
+    <Button
+        android:id="@+id/rest_call"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="564dp"
+        android:onClick="restCallOnClick"
+        android:text="@string/rest_call"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.962" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.919"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/take_photo"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="159dp"
-        android:layout_marginEnd="164dp"
-        android:layout_marginBottom="396dp"
-        android:onClick="bntClick"
-        android:text="REST CALL"
+        android:id="@+id/image_select"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="37dp"
+        android:onClick="imageSelectOnClick"
+        android:text="@string/image_select"
+        app:layout_constraintEnd_toStartOf="@+id/take_photo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/take_photo"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="34dp"
+        android:onClick="takePhotoOnClick"
+        android:text="@string/take_photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/image_select"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/image_selected_statement"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="64dp"
+        android:editable="false"
+        android:text="@string/image_is_not_selected"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/rest_call"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_select" />
+
+    <TextView
+        android:id="@+id/Result_Viewer"
+        android:layout_width="365dp"
+        android:layout_height="440dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="47dp"
+        android:scrollbars="vertical"
+        android:text="결과창"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/testImageView"
-        android:layout_width="292dp"
-        android:layout_height="194dp"
-        android:layout_marginStart="65dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="54dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/stat_sys_warning" />
+        app:layout_constraintTop_toBottomOf="@+id/image_selected_statement"
+        app:layout_constraintVertical_bias="0.419" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

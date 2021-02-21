@@ -43,7 +43,6 @@ public class S3FileUpload {
                         new PutObjectRequest(BUCKET_NAME, file.getName(), file);
                 putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead); // file permission
                 result = amazonS3.putObject(putObjectRequest); // upload file
-                System.out.println(result.getETag());
 
             } catch (AmazonServiceException ase) {
                 ase.printStackTrace();
