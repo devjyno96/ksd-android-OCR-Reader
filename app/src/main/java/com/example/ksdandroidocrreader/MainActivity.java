@@ -22,6 +22,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 public class MainActivity extends AppCompatActivity {
 
     private boolean image_selected = false;
@@ -73,7 +78,29 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             //doInBackground()로 부터 리턴된 값이 onPostExecute()의 매개변수로 넘어오므로 s를 출력한다.
-            Test_Viewer.setText(s);
+            Test_Viewer.setText(getResultField(s));
+        }
+
+        private String getResultField(String json){
+            JsonParser parser = new JsonParser();
+            String result = "";
+
+            // 판독 성공
+            JsonArray elements = parser.parse(json).
+                                   getAsJsonObject().get("images").
+                                   getAsJsonArray().get(0).
+                                   getAsJsonObject().get("fields").
+                                   getAsJsonArray();
+            //판독 실패 시 원문 출력
+            if(elements.size() == 0){
+                return json;
+            }
+
+            for (int i=0;i<elements.size();i++) {
+                result += elements.get(i) + "\n" ;
+            }
+            System.out.println(elements.size());
+            return result;
         }
     }
 
@@ -188,4 +215,5 @@ public class MainActivity extends AppCompatActivity {
         selectedImageUri = image.getAbsolutePath();
         return image;
     }
+
 }
