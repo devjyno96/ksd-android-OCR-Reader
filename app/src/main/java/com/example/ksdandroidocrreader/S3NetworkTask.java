@@ -1,5 +1,7 @@
 package com.example.ksdandroidocrreader;
 
+import android.os.AsyncTask;
+
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -20,7 +22,37 @@ import java.io.FileNotFoundException;
  * This code expects that you have AWS credentials set up per:
  * http://docs.aws.amazon.com/java-sdk/latest/developer-guide/setup-credentials.html
  */
-public class S3FileUpload {
+
+public class S3NetworkTask extends AsyncTask<Void, Void, String> {
+
+    private File uploadfile;
+
+    public S3NetworkTask(File uploadfile) {
+        this.uploadfile = uploadfile;
+    }
+
+    @Override
+    protected String doInBackground(Void... params) {
+
+        S3FileUpload s3FileUpload = new S3FileUpload();
+        try {
+            s3FileUpload.uploadFile(uploadfile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        String result = "s3upload complete";
+
+        return result;
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+        //doInBackground()로 부터 리턴된 값이 onPostExecute()의 매개변수로 넘어오므로 s를 출력한다.
+    }
+}
+
+class S3FileUpload {
     private static final String BUCKET_NAME = "ocr.image.ksd.hansung.ac.kr";
     private static final String ACCESS_KEY = "AKIAVEEOCLJLEJWUMC7L";
     private static final String SECRET_KEY = "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";

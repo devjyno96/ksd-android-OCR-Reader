@@ -21,6 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -52,89 +53,8 @@ public class MainActivity extends AppCompatActivity {
         image_state = (TextView) findViewById(R.id.image_selected_statement);
     }
 
-    public class RestNetworkTask extends AsyncTask<Void, Void, String> {
 
-        private String url;
-        private ContentValues values;
-
-        public RestNetworkTask(String url, ContentValues values) {
-
-            this.url = url;
-            this.values = values;
-        }
-
-        @Override
-        protected String doInBackground(Void... params) {
-
-            String result = null; // 요청 결과를 저장할 변수.
-            CallRest requestHttpURLConnection = new CallRest();
-            // result = requestHttpURLConnection.request(url, values); // 해당 URL로 부터 결과물을 얻어온다.
-            result = requestHttpURLConnection.request(url, values); // 해당 URL로 부터 결과물을 얻어온다.
-
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            //doInBackground()로 부터 리턴된 값이 onPostExecute()의 매개변수로 넘어오므로 s를 출력한다.
-            Test_Viewer.setText(getResultField(s));
-        }
-
-        private String getResultField(String json){
-            JsonParser parser = new JsonParser();
-            String result = "";
-
-            // 판독 성공
-            JsonArray elements = parser.parse(json).
-                                   getAsJsonObject().get("images").
-                                   getAsJsonArray().get(0).
-                                   getAsJsonObject().get("fields").
-                                   getAsJsonArray();
-            //판독 실패 시 원문 출력
-            if(elements.size() == 0){
-                return json;
-            }
-
-            for (int i=0;i<elements.size();i++) {
-                result += elements.get(i) + "\n" ;
-            }
-            System.out.println(elements.size());
-            return result;
-        }
-    }
-
-    public class S3NetworkTask extends AsyncTask<Void, Void, String> {
-
-        private File uploadfile;
-
-        public S3NetworkTask(File uploadfile) {
-            this.uploadfile = uploadfile;
-        }
-
-        @Override
-        protected String doInBackground(Void... params) {
-
-            S3FileUpload s3FileUpload = new S3FileUpload();
-            try {
-                s3FileUpload.uploadFile(uploadfile);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            String result = "s3upload complete";
-
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            //doInBackground()로 부터 리턴된 값이 onPostExecute()의 매개변수로 넘어오므로 s를 출력한다.
-            Test_Viewer.setText(s);
-        }
-    }
-
-    public void restCallOnClick(View view) throws IOException {
+    public void restCallOnClick(View view) throws IOException, ExecutionException, InterruptedException {
         if(!(image_selected)){
             String Text = "이미지를 선택해 주십시오.";
             Toast.makeText(getApplicationContext(),Text, Toast.LENGTH_SHORT).show();
@@ -142,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         S3NetworkTask s3NetworkTask = new S3NetworkTask(new File(selectedImageUri));
-        s3NetworkTask.execute();
+        String resultS3 = s3NetworkTask.execute().get();
+        Test_Viewer.setText(resultS3);
 
         String[] temp = selectedImageUri.split("/");
         String fileName = temp[temp.length - 1];
@@ -151,10 +72,10 @@ public class MainActivity extends AppCompatActivity {
         params.put("url", S3_URL + S3FileUpload.getBucket_name() + "/" + fileName);
 
         RestNetworkTask restNetworkTask = new RestNetworkTask(REST_URL, params);
-        restNetworkTask.execute();
+        String resultRest = restNetworkTask.execute().get();
+        Test_Viewer.setText(resultRest);
 
-        String Text = "실행 완료";
-        Toast.makeText(getApplicationContext(),Text, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"실행 완료", Toast.LENGTH_SHORT).show();
     }
 
     public void imageSelectOnClick(View v) {
@@ -215,5 +136,9 @@ public class MainActivity extends AppCompatActivity {
         selectedImageUri = image.getAbsolutePath();
         return image;
     }
-
+    public void testChangeLayoutOnClick(View v) {
+        setContentView(R.layout.activity_main);
+        CategoryFragment categoryFragment = new CategoryFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_content, categoryFragment).commit();
+    }
 }
