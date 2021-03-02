@@ -7,105 +7,59 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/rest_call"
+        android:id="@+id/result_view"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="564dp"
-        android:onClick="restCallOnClick"
-        android:text="@string/rest_call"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.919"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/take_photo"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/image_select"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="37dp"
-        android:onClick="imageSelectOnClick"
-        android:text="@string/image_select"
-        app:layout_constraintEnd_toStartOf="@+id/take_photo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/take_photo"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="34dp"
-        android:onClick="takePhotoOnClick"
-        android:text="@string/take_photo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/image_select"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/image_selected_statement"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="64dp"
-        android:editable="false"
-        android:text="@string/image_is_not_selected"
-        android:textColor="#000000"
-        android:textColorHint="#000000"
-        app:layout_constraintEnd_toStartOf="@+id/rest_call"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_select" />
-
-    <TextView
-        android:id="@+id/Result_Viewer"
-        android:layout_width="365dp"
-        android:layout_height="440dp"
-        android:layout_marginStart="26dp"
-        android:layout_marginEnd="47dp"
-        android:scrollbars="vertical"
-        android:text="결과창"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_selected_statement"
-        app:layout_constraintVertical_bias="0.419" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="138dp"
-        android:layout_marginEnd="180dp"
-        android:layout_marginBottom="5dp"
-        android:onClick="testChangeLayoutOnClick"
-        android:text="Layout"
-        app:layout_constraintBottom_toTopOf="@+id/Result_Viewer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <FrameLayout
-        android:id="@+id/main_content"
-        android:layout_width="298dp"
-        android:layout_height="494dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="210dp"
+        android:onClick="onClickResultView"
+        android:text="result view"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/Result_Viewer"
-        app:layout_constraintTop_toBottomOf="@+id/Result_Viewer"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintStart_toEndOf="@+id/run_ocr" />
 
-    </FrameLayout>
+    <Button
+        android:id="@+id/login"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="264dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="1dp"
+        android:onClick="onClickLogIn"
+        android:text="log in"
+        app:layout_constraintBottom_toTopOf="@+id/sign_up"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/sign_up"
+        android:layout_width="300dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="26dp"
+        android:onClick="onClickSignUp"
+        android:text="sign up"
+        app:layout_constraintBottom_toTopOf="@+id/result_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login" />
+
+    <Button
+        android:id="@+id/run_ocr"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="210dp"
+        android:onClick="onClickRunOCR"
+        android:text="run ocr"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/result_view"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
