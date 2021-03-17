@@ -1,24 +1,22 @@
 package com.example.ksdandroidocrreader;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
+public class ResultsFragment extends Fragment {
 
-public class CategoryFragment extends Fragment {
-
-    private RecyclerView categoryView = null;
+    private RecyclerView ResultsView = null;
 
     private static String[] arr_string = {
             "발달 검사",
@@ -32,22 +30,21 @@ public class CategoryFragment extends Fragment {
     };
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.category_main, container, false);
-        categoryView = view.findViewById(R.id.categoryfragment_recyclerview);
-        categoryView.setHasFixedSize(true);
-        categoryView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        categoryView.setAdapter(new CategoryFragmentRecyclerViewAdapter(this, arr_string));
-
+        View view = inflater.inflate(R.layout.results_main, container, false);
+        ResultsView = view.findViewById(R.id.result_recycle);
+        ResultsView.setHasFixedSize(true);
+        ResultsView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        ResultsView.setAdapter(new ResultsFragmentRecyclerViewAdapter(this, arr_string));
         return view;
     }
 
 }
 
-class CategoryFragmentRecyclerViewAdapter extends RecyclerView.Adapter<CategoryFragmentRecyclerViewAdapter.ViewHolder> {
+class ResultsFragmentRecyclerViewAdapter extends RecyclerView.Adapter<ResultsFragmentRecyclerViewAdapter.ViewHolder> {
     private String[] localStringDataSet;
-    CategoryFragment fragment;
+    ResultsFragment fragment;
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView textView;
 
         public ViewHolder(View view) {
@@ -56,10 +53,7 @@ class CategoryFragmentRecyclerViewAdapter extends RecyclerView.Adapter<CategoryF
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), ResultsActivity.class);
-                    intent.putExtra("code", getAdapterPosition());
-                    intent.putExtra("name", localStringDataSet[getAdapterPosition()]);
-                    v.getContext().startActivity(intent);
+                    System.out.println(getAdapterPosition());
                 }
             });
         }
@@ -70,7 +64,7 @@ class CategoryFragmentRecyclerViewAdapter extends RecyclerView.Adapter<CategoryF
     }
 
 
-    public CategoryFragmentRecyclerViewAdapter(CategoryFragment fragment, String[] dataSet) {
+    public ResultsFragmentRecyclerViewAdapter(ResultsFragment fragment, String[] dataSet) {
         this.fragment = fragment;
         localStringDataSet = dataSet;
     }
