@@ -1,5 +1,6 @@
 package com.example.ksdandroidocrreader;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -19,14 +20,12 @@ public class ResultsFragment extends Fragment {
     private RecyclerView ResultsView = null;
 
     private static String[] arr_string = {
-            "발달 검사",
-            "사회성 검사",
-            "성격 검사",
-            "언어 검사",
-            "자폐 검사",
-            "지능 검사",
-            "집중력 검사",
-            "학습 장애 검사",
+            "분석 결과 1",
+            "분석 결과 2",
+            "분석 결과 3",
+            "분석 결과 4",
+            "분석 결과 5",
+            "분석 결과 6",
     };
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,7 +52,8 @@ class ResultsFragmentRecyclerViewAdapter extends RecyclerView.Adapter<ResultsFra
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    System.out.println(getAdapterPosition());
+                    Intent intent = new Intent(v.getContext(), AnalysisResultActivity.class);
+                    v.getContext().startActivity(intent);
                 }
             });
         }

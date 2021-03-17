@@ -23,9 +23,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KsdAndroidOCRReader"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SubActivity"></activity>
-        <activity android:name=".CategoryActivity"></activity>
-        <activity android:name=".ResultsActivity"></activity>
+        <activity android:name=".AnalysisResultActivity"></activity>
+        <activity android:name=".SubActivity" />
+        <activity android:name=".CategoryActivity" />
+        <activity android:name=".ResultsActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
