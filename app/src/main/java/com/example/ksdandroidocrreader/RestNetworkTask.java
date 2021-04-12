@@ -45,23 +45,23 @@ public class RestNetworkTask extends AsyncTask<Void, Void, String> {
     private String getResultField(String json){
         JsonParser parser = new JsonParser();
         String result = "";
-
+        return json;
         // 판독 성공
-        JsonArray elements = parser.parse(json).
-                getAsJsonObject().get("images").
-                getAsJsonArray().get(0).
-                getAsJsonObject().get("fields").
-                getAsJsonArray();
-        //판독 실패 시 원문 출력
-        if(elements.size() == 0){
-            return json;
-        }
-
-        for (int i=0;i<elements.size();i++) {
-            result += elements.get(i) + "\n" ;
-        }
-        System.out.println(elements.size());
-        return result;
+//        JsonArray elements = parser.parse(json).
+//                getAsJsonObject().get("images").
+//                getAsJsonArray().get(0).
+//                getAsJsonObject().get("fields").
+//                getAsJsonArray();
+//        //판독 실패 시 원문 출력
+//        if(elements.size() == 0){
+//            return json;
+//        }
+//
+//        for (int i=0;i<elements.size();i++) {
+//            result += elements.get(i) + "\n" ;
+//        }
+//        System.out.println(elements.size());
+//        return result;
     }
 }
 

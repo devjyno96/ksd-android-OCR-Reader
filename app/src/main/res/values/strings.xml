@@ -5,4 +5,5 @@
     <string name="image_select">Image Select</string>
     <string name="take_photo">take photo</string>
     <string name="image_is_not_selected">Image is not selected</string>
+    <string name="Result_Viewer">결과창</string>
 </resources>
