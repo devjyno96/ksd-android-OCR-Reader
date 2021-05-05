@@ -51,6 +51,8 @@ public class SubActivity  extends AppCompatActivity {
         Test_Viewer = findViewById(R.id.Result_Viewer);
         Test_Viewer.setMovementMethod(new ScrollingMovementMethod());
         image_state = findViewById(R.id.image_selected_statement);
+
+        takePhotoOnClick(null); // activity 시작하자 마자 camera intent 시작
     }
 
 
@@ -134,6 +136,7 @@ public class SubActivity  extends AppCompatActivity {
 
         // Save a file: path for use with ACTION_VIEW intents
         selectedImageUri = image.getAbsolutePath();
+        System.out.println(image.getAbsolutePath());
         return image;
     }
 }
